@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="requisition_view_tree" model="ir.ui.view">
+        <field name="name">requisition.view.tree</field>
+        <field name="model">requisition</field>
+        <field name="arch" type="xml">
+            <tree string="Requisition">
+                <field name="no" />
+                <field name="date" />
+                <field name="buyer_order_no" />
+                <field name="customer_id" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="requisition_view_form" model="ir.ui.view">
+        <field name="name">requisition.view.form</field>
+        <field name="model">requisition</field>
+        <field name="arch" type="xml">
+            <form string="Requisition">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="no" />
+                            <field name="buyer_order_no" />
+                            <field name="sale_order_ids" />
+                        </group>
+                        <group >
+                            <field name="date" />
+                            <field name="customer_id" />
+                        </group>
+                  
+                    </group>
+                     <button string="Create Line" name="create_line" type="object" class="oe_highlight"/>
+                    <notebook>
+                        <page name="Requisitions">
+                            <field name="requisition_line">
+                                <tree editable="bottom">
+                                    <field name="sale_id" string="Sale Id" />
+                                    <field name="product_id" string="Product"/>
+                                    <field name="description" string="Description" />
+                                    <field name="qty" string="Quantity" />
+                                    <field name="delivered_qty" string="Delivered Qty"/>
+                                    <field name="balance_qty" string="Balance Qty" />
+                                    <field name="unit_price" string="Unit Price"/>
+                                    <field name="sub_total" string="Sub Total" />
+                                    <field name="image"  widget="image" options="{'size': [150, 150]}" string="Image"/>
+                                </tree>
+                            </field>
+                        </page>
+
+                    </notebook>
+
+                </sheet>
+
+            </form>
+        </field>
+    </record>
+
+
+
+
+
+    <record id="requisition_record_action" model="ir.actions.act_window">
+        <field name="name">Requisition Action </field>
+        <field name="res_model">requisition</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="requisition_menu" name="Requisition Menu"/>
+    <menuitem id="requisition_submenu" name="Requisition Sub Menu" parent="requisition_menu"/>
+    <menuitem id="requisition_submenu_item" name="Requisition Sub Menu Item" action="requisition_record_action" parent="requisition_submenu"/>
+</odoo>
